@@ -1,2 +1,2 @@
-docker build -t lukebond/demo-api .
-docker push lukebond/demo-api
+docker build -t controlplane/demo-api .
+docker push controlplane/demo-api
