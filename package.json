@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:controlplane/demo-api.git"
+    "url": "git+ssh://git@github.com/controlplane/demo-api.git"
   },
   "keywords": [
     "demo",
@@ -23,5 +23,8 @@
   "dependencies": {
     "ip": "^0.3.1",
     "restify": "^2.8.1"
+  },
+  "directories": {
+    "test": "test"
   }
 }
