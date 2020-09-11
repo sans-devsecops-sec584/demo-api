@@ -2,17 +2,16 @@
 
 @Library('jenkins-shared-library@docker-build') _
 
-pipelineDemo([
-  stages: [
-    gitSecrets: true,
-    gitCommitConformance: true,
-    containerLint: true,
-    containerBuild: true,
-    containerScan: true,
-//    shfmt: true,
-//    unitTest: [
-//      command: "make test-unit",
-//      reports: "test/output/*.xml"
-//    ]
-  ],
-])
+pipeline {
+    agent none
+    stages {
+        stage ('Example') {
+            steps {
+                // log.info 'Starting' 
+                script { 
+                    buildImage.checkout
+                }
+            }
+        }
+    }
+}
