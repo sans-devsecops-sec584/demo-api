@@ -1,17 +1,31 @@
 #!/usr/bin/env groovy
 
-@Library('jenkins-shared-library@docker-build') _
+//@Library('jenkins-shared-library') _
 
-pipeline {
-    agent none
-    stages {
-        stage ('Example') {
-            steps {
-                // log.info 'Starting' 
-                script { 
-                    buildImage.checkout
-                }
-            }
-        }
-    }
-}
+//if library isn't loaded in jenkins:
+
+library identifier: 'jenkins-shared-library@master',
+        retriever: modernSCM(
+          [
+            $class: 'GitSCMSource',
+            remote: 'https://github.com/controlplaneio/jenkins-shared-library.git'
+          ])
+
+pipelineDemo([
+  config: [
+    image               : "demo-api",
+    imageTag            : "demo-api:jsl",
+  ],
+  stages: [
+    gitSecrets          : true,
+    gitCommitConformance: true,
+    containerLint       : true,
+    // TODO(ajm) escaping vuln
+    containerBuild      : [cmd: "make build"],
+    containerPush       : false,
+
+    // TODO(ajm): how to get image hashes to scan?
+    containerScan       : false,
+  ],
+])
+
