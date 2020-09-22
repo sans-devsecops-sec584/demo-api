@@ -1,32 +1,27 @@
-node {
-  stage('Checkout') {
-    checkout scm
-  }
+#!/usr/bin/env groovy
 
-  stage('Build') {
-    withCredentials([
-        usernamePassword(credentialsId: 'docker-credentials',
-                         usernameVariable: 'USERNAME',
-                         passwordVariable: 'PASSWORD')]) {
-      sh 'docker image build -t ${USERNAME}/demo-api:latest .'
-    }
-  }
+@Library('jenkins-shared-library') _
 
-  stage('Push') {
-    withCredentials([
-        usernamePassword(credentialsId: 'docker-credentials',
-                         usernameVariable: 'USERNAME',
-                         passwordVariable: 'PASSWORD')]) {
-      sh 'docker login -p "${PASSWORD}" -u "${USERNAME}"'
-      sh 'docker image push ${USERNAME}/demo-api:latest'
-    }
-  }
+// if library isn't loaded in jenkins:
 
-  stage('Deploy') {
-    withCredentials([
-        file(credentialsId: 'kube-config',
-             variable: 'KUBECONFIG')]) {
-      sh 'kubectl apply -f deployment.yaml'
-    }
-  }
-}
+// library identifier: 'jenkins-shared-library@master',
+//         retriever: modernSCM(
+//           [
+//             $class: 'GitSCMSource',
+//             remote: 'https://github.com/controlplaneio/jenkins-shared-library.git'
+//           ])
+
+pipelineDemo([
+  stages: [
+    gitSecrets          : true,
+    gitCommitConformance: true,
+    containerLint       : true,
+    // TODO(ajm) escaping vuln
+    containerBuild      : [cmd: "make build"],
+    containerPush       : false,
+
+    // TODO(ajm): how to get image hashes to scan?
+    containerScan       : false,
+  ],
+])
+
