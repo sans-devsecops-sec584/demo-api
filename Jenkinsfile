@@ -1,21 +1,17 @@
 #!/usr/bin/env groovy
 
-//@Library('jenkins-shared-library') _
+@Library('jenkins-shared-library') _
 
-//if library isn't loaded in jenkins:
+// if library isn't loaded in jenkins:
 
-library identifier: 'jenkins-shared-library@master',
-        retriever: modernSCM(
-          [
-            $class: 'GitSCMSource',
-            remote: 'https://github.com/controlplaneio/jenkins-shared-library.git'
-          ])
+// library identifier: 'jenkins-shared-library@master',
+//         retriever: modernSCM(
+//           [
+//             $class: 'GitSCMSource',
+//             remote: 'https://github.com/controlplaneio/jenkins-shared-library.git'
+//           ])
 
 pipelineDemo([
-  config: [
-    image               : "demo-api",
-    imageTag            : "demo-api:jsl",
-  ],
   stages: [
     gitSecrets          : true,
     gitCommitConformance: true,
