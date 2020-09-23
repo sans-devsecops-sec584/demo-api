@@ -44,7 +44,7 @@ endef
 .PHONY: build
 build: ## build demo-api image
 	@echo "+ $@"
-	$(call build_image,$(CONTAINER_NAME_BASE),docker/Dockerfile,.)
+	$(call build_image,$(CONTAINER_NAME_BASE),Dockerfile,.)
 
 .PHONY: push
 push: ## push demo-api image
