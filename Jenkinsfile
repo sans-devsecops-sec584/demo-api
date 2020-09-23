@@ -12,6 +12,9 @@
 //           ])
 
 pipelineDemo([
+  env: [
+    //imageTagOverride    : "controlplane/demo-api:latest",
+  ],
   stages: [
     gitSecrets          : true,
     gitCommitConformance: true,
