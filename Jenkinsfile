@@ -12,16 +12,13 @@
 //           ])
 
 pipelineDemo([
-  env: [
-    //imageTagOverride    : "controlplane/demo-api:latest",
-  ],
   stages: [
     gitSecrets          : true,
     gitCommitConformance: true,
     containerLint       : true,
     // TODO(ajm) escaping vuln
-    containerBuild      : [cmd: "make build"],
-    containerPush       : [cmd: "make push"],
+    containerBuild      : true,
+    containerPush       : true,
 
     // TODO(ajm): how to get image hashes to scan?
     containerScan       : false,
