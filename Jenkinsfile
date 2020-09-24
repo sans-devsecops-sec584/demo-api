@@ -19,6 +19,7 @@ pipelineDemo([
     // TODO(ajm) escaping vuln
     containerBuild      : true,
     containerPush       : true,
+    containerScan       : true,
 
     // TODO(ajm): how to get image hashes to scan?
     containerScan       : false,
