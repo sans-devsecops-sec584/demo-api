@@ -19,7 +19,7 @@ pipelineImageBuild([
     // TODO(ajm) escaping vuln
     containerBuild      : true,
     containerScan       : true,
-    containerPush       : false,
+    containerPush       : true,
   ],
 ])
 
