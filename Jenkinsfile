@@ -11,7 +11,7 @@
 //             remote: 'https://github.com/controlplaneio/jenkins-shared-library.git'
 //           ])
 
-pipelineDemo([
+pipelineImageBuild([
   stages: [
     gitSecrets          : true,
     gitCommitConformance: true,
