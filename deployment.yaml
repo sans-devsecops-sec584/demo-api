@@ -15,7 +15,7 @@ spec:
         run: demo-api
     spec:
       containers:
-      - image: controlplane/demo-api:latest
+      - image: controlplane/demo-api:29-b2890691ec9dd74bfcd9f34b520b9d5b0a1d6aac
         imagePullPolicy: Always
         name: demo-api
         ports:
